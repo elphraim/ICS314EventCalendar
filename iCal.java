@@ -24,6 +24,8 @@ public class iCal {
   private String DTSTAMP;
   private String title2;
   private String place;
+  //Declare Geo
+  private float GEO;
 
 
   public iCal(String eventTitle, String date, String startTime, String endTime, String location, String sum) {
@@ -59,6 +61,9 @@ public class iCal {
       bw.write(prodid);
       bw.write(eventBegin);
       bw.write(UID);
+      //Geo start
+      bw.write(GEO);
+      //Geo end
       bw.write(DTSTAMP);
       bw.write(organizer);
       bw.write(DTSTART);
