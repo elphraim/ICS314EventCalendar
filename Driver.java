@@ -24,9 +24,15 @@ public class Driver {
     System.out.print(" Location : ");
     String location = scan.nextLine();
     
+    System.out.print(" Latitude : ");
+    float geo1 = scan.nextLine();
+    
+    System.out.print(" Longitude : ");
+    float geo2 = scan.nextLine();
+    
     scan.close();
 
-    iCal calendar = new iCal(eventTitle, date, startTime, endTime, location, sum);
+    iCal calendar = new iCal(eventTitle, date, startTime, endTime, location, sum, geo1, geo2);
     calendar.write();
   }
 
