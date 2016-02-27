@@ -37,28 +37,33 @@ public class iCal {
     DTSTAMP = "DTSTAMP:" + date + NL;
     //initialize GEO
     latLong(geo1, geo2);
-    GEO = "GEO:" + geo1 + ":" + geo2;
+    GEO = latlong(geo1, geo2);
     title2 = eventTitle;
   }
   
-  //Limit GEO input to proper numbers
-  void latLong(float lat, float lon) {
+  //Format GEO
+  String latLong(float lat, float lon) {
+    String ret = "GEO:";
     float temp = 0.0;
     if(lat > 90.0) {
       temp = (lat % 90);
       lat = temp;
+      ret = ret + "+" + lat + ":";
     }
     if(lon > 180) {
       temp = (lon % 180);
       lon = temp;
+      ret = ret + "+" + lon;
     }
     if(lat < -90.0) {
       temp = ((-1*lat) % 90);
       lat = -1 * temp;
+            ret = ret + lat + ":";
     }
     if(lon < -180) {
       temp = ((-1 * lon) % 180);
       lon = -1 * temp;
+      ret = ret + lon;
     }
     
   }
