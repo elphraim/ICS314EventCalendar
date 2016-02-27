@@ -25,16 +25,18 @@ public class iCal {
   private String title2;
   private String place;
   //Declare Geo
-  private float GEO;
+  private String GEO;
 
 
-  public iCal(String eventTitle, String date, String startTime, String endTime, String location, String sum) {
+  public iCal(String eventTitle, String date, String startTime, String endTime, String location, String sum, float geo1, float geo2) {
     title = "SUMMARY:" + eventTitle + NL;
     summary = "DESCRIPTION:" + sum + NL;
     place = "LOCATION:" + location + NL;
     DTSTART = "DTSTART:" + startTime + NL;
     DTEND = "DTEND:" + endTime + NL;
     DTSTAMP = "DTSTAMP:" + date + NL;
+    //initialize GEO
+    GEO = "GEO:" + geo1 + ":" + geo2;
     title2 = eventTitle;
   }
 
