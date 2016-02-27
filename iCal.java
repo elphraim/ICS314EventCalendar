@@ -36,8 +36,31 @@ public class iCal {
     DTEND = "DTEND:" + endTime + NL;
     DTSTAMP = "DTSTAMP:" + date + NL;
     //initialize GEO
+    latLong(geo1, geo2);
     GEO = "GEO:" + geo1 + ":" + geo2;
     title2 = eventTitle;
+  }
+  
+  //Limit GEO input to proper numbers
+  void latLong(float lat, float lon) {
+    float temp = 0.0;
+    if(lat > 90.0) {
+      temp = (lat % 90);
+      lat = temp;
+    }
+    if(lon > 180) {
+      temp = (lon % 180);
+      lon = temp;
+    }
+    if(lat < -90.0) {
+      temp = ((-1*lat) % 90);
+      lat = -1 * temp;
+    }
+    if(lon < -180) {
+      temp = ((-1 * lon) % 180);
+      lon = -1 * temp;
+    }
+    
   }
 
 
