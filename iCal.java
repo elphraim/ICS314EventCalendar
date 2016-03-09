@@ -88,7 +88,7 @@ public class iCal {
 		{
 			CLASS = "CLASS:PRIVATE";
 		}
-		return (CLASS);
+		return (CLASS + NL);
 	}
 
 
