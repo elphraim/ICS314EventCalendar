@@ -26,9 +26,11 @@ public class iCal {
   private String place;
   //Declare Geo
   private String GEO;
+  //Declare Classification
+  private String CLASS;
 
 
-  public iCal(String eventTitle, String date, String startTime, String endTime, String location, String sum, float geo1, float geo2) {
+  public iCal(String eventTitle, String date, String startTime, String endTime, String location, String sum, float geo1, float geo2, String classChoice) {
     title = "SUMMARY:" + eventTitle + NL;
     summary = "DESCRIPTION:" + sum + NL;
     place = "LOCATION:" + location + NL;
@@ -37,6 +39,8 @@ public class iCal {
     DTSTAMP = "DTSTAMP:" + date + NL;
     //initialize GEO
     GEO = latLong(geo1, geo2);
+    //intitalize CLASSIFICATION
+    CLASS = Classification(classChoice);
     title2 = eventTitle;
   }
   
@@ -66,6 +70,26 @@ public class iCal {
     }
     
   }
+  public String Classification(String cLASS) 
+	{
+		if(cLASS.equalsIgnoreCase("Public"))
+		{
+			CLASS = "CLASS:PUBLIC";
+    }
+		else if(cLASS.equalsIgnoreCase("Confidential"))
+		{
+			CLASS = "CLASS:CONFIDENTIAL";
+		}
+		else if(cLASS.equalsIgnoreCase("DEFAULT"))
+		{
+			CLASS = "CLASS:PUBLIC";
+		}
+		else
+		{
+			CLASS = "CLASS:PRIVATE";
+		}
+		return (CLASS);
+	}
 
 
   public void write() {
@@ -100,6 +124,7 @@ public class iCal {
       bw.write(title);
       bw.write(summary);
       bw.write(place);
+      bw.write(CLASS);
       bw.write(eventEnd);
       bw.write(calEnd);
 
