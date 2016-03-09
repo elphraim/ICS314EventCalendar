@@ -36,8 +36,7 @@ public class iCal {
     DTEND = "DTEND:" + endTime + NL;
     DTSTAMP = "DTSTAMP:" + date + NL;
     //initialize GEO
-    latLong(geo1, geo2);
-    GEO = latlong(geo1, geo2);
+    GEO = latLong(geo1, geo2);
     title2 = eventTitle;
   }
   
