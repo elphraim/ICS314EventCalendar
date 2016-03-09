@@ -30,6 +30,8 @@ public class Driver {
     System.out.print(" Longitude : ");
     float geo2 = scan.nextFloat();
     
+    System.out.print(" Class : ");
+    String classChoice = scan.nextLine();
     scan.close();
 
     iCal calendar = new iCal(eventTitle, date, startTime, endTime, location, sum, geo1, geo2);
