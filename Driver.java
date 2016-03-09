@@ -22,13 +22,13 @@ public class Driver {
     String sum = scan.nextLine();
     
     System.out.print(" Location : ");
-    String location = scan.nextFloat();
+    String location = scan.nextLine();
     
     System.out.print(" Latitude : ");
     float geo1 = scan.nextFloat();
     
     System.out.print(" Longitude : ");
-    float geo2 = scan.nextLine();
+    float geo2 = scan.nextFloat();
     
     scan.close();
 
