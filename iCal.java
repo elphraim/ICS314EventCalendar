@@ -15,81 +15,80 @@ public class iCal {
   // private String name = "EventName" + NL;
   // private String summary = "summary" + NL;
 
-  private String UID = "UID:uid1@example.com" + NL;
-  private String organizer = "ORGANIZER;CN=Name Lastname:MAILTO:sample@example.com" + NL;
+  private String UID = "UID:Uujpb6nrvgcqf9a1ae6fh2ptepc@google.com" + NL;
   private String title;
   private String summary;
   private String DTSTART;
   private String DTEND;
-  private String DTSTAMP;
+
   private String title2;
   private String place;
-  //Declare Geo
   private String GEO;
-  //Declare Classification
+  // Declare Classification
   private String CLASS;
 
 
-  public iCal(String eventTitle, String date, String startTime, String endTime, String location, String sum, float geo1, float geo2, String classChoice) {
+  public iCal(String eventTitle, String date, String startTime, String endTime, String location, String sum,
+      float geo1, float geo2, String classChoice) {
     title = "SUMMARY:" + eventTitle + NL;
     summary = "DESCRIPTION:" + sum + NL;
     place = "LOCATION:" + location + NL;
-    DTSTART = "DTSTART:" + startTime + NL;
-    DTEND = "DTEND:" + endTime + NL;
-    DTSTAMP = "DTSTAMP:" + date + NL;
-    //initialize GEO
-    GEO = latLong(geo1, geo2);
-    //intitalize CLASSIFICATION
+    DTSTART = "DTSTART:" + date + "T" + startTime + "Z" + NL;
+    DTEND = "DTEND:" + date + "T" + endTime + "Z" + NL;
+    // initialize GEO
+    // GEO = latLong(geo1, geo2);
+    GEO = "GEO:" + geo1 + ";" + geo2 + NL;
+
+    // initialize CLASSIFICATION
     CLASS = Classification(classChoice);
     title2 = eventTitle;
   }
-  
-  //Format GEO
-  String latLong(float lat, float lon) {
+
+
+  // Format GEO
+  public String latLong(float lat, float lon) {
     String ret = "GEO:";
-    float temp = 0.0;
-    if(lat > 90.0) {
+    float temp;
+    if (lat > 90.0) {
       temp = (lat % 90);
       lat = temp;
       ret = ret + "+" + lat + ":";
     }
-    if(lon > 180) {
+    if (lon > 180) {
       temp = (lon % 180);
       lon = temp;
       ret = ret + "+" + lon;
     }
-    if(lat < -90.0) {
-      temp = ((-1*lat) % 90);
+    if (lat < -90.0) {
+      temp = ((-1 * lat) % 90);
       lat = -1 * temp;
-            ret = ret + lat + ":";
+      ret = ret + lat + ":";
     }
-    if(lon < -180) {
+    if (lon < -180) {
       temp = ((-1 * lon) % 180);
       lon = -1 * temp;
       ret = ret + lon;
     }
-    
+    return null;
+
   }
-  public String Classification(String cLASS) 
-	{
-		if(cLASS.equalsIgnoreCase("Public"))
-		{
-			CLASS = "CLASS:PUBLIC";
+
+
+  public String Classification(String cLASS) {
+    if (cLASS.equalsIgnoreCase("Public")) {
+      CLASS = "CLASS:PUBLIC";
     }
-		else if(cLASS.equalsIgnoreCase("Confidential"))
-		{
-			CLASS = "CLASS:CONFIDENTIAL";
-		}
-		else if(cLASS.equalsIgnoreCase("DEFAULT"))
-		{
-			CLASS = "CLASS:PUBLIC";
-		}
-		else
-		{
-			CLASS = "CLASS:PRIVATE";
-		}
-		return (CLASS + NL);
-	}
+    else if (cLASS.equalsIgnoreCase("Confidential")) {
+      CLASS = "CLASS:CONFIDENTIAL";
+    }
+    else if (cLASS.equalsIgnoreCase("DEFAULT")) {
+      CLASS = "CLASS:PUBLIC";
+    }
+    else {
+      CLASS = "CLASS:PRIVATE";
+    }
+    return (CLASS + NL);
+  }
 
 
   public void write() {
@@ -114,11 +113,7 @@ public class iCal {
       bw.write(prodid);
       bw.write(eventBegin);
       bw.write(UID);
-      //Geo start
       bw.write(GEO);
-      //Geo end
-      bw.write(DTSTAMP);
-      bw.write(organizer);
       bw.write(DTSTART);
       bw.write(DTEND);
       bw.write(title);
@@ -138,4 +133,78 @@ public class iCal {
     }
   }
 
+
+  public String getVersion() {
+    return version;
+  }
+
+
+  public String getProdid() {
+    return prodid;
+  }
+
+
+  public String getCalBegin() {
+    return calBegin;
+  }
+
+
+  public String getCalEnd() {
+    return calEnd;
+  }
+
+
+  public String getEventBegin() {
+    return eventBegin;
+  }
+
+
+  public String getEventEnd() {
+    return eventEnd;
+  }
+
+
+  public String getUID() {
+    return UID;
+  }
+
+
+  public String getTitle() {
+    return title;
+  }
+
+
+  public String getSummary() {
+    return summary;
+  }
+
+
+  public String getDTSTART() {
+    return DTSTART;
+  }
+
+
+  public String getDTEND() {
+    return DTEND;
+  }
+
+
+  public String getTitle2() {
+    return title2;
+  }
+
+
+  public String getPlace() {
+    return place;
+  }
+
+
+  public String getGEO() {
+    return GEO;
+  }
+
+
+  public String getCLASS() {
+    return CLASS;
+  }
 }
