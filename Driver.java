@@ -14,7 +14,13 @@ public class Driver {
 
     System.out.print(" Starting Time (24HR 00:00:00) :  ");
     String startTime = scan.nextLine();
-
+    while(startTime.length() != 6)
+    {
+    	System.out.println("Invalid Entry Please Enter with format 00:00:00");
+    	System.out.println("Please try again.");
+    	System.out.println("Starting Time (24HR 00:00:00) : " );
+    	startTime= scan.nextLine();
+    }
     System.out.print(" Ending Time (24HR 00:00:00)  :  ");
     String endTime = scan.nextLine();
 
