@@ -84,6 +84,15 @@ public class iCal {
     else if (cLASS.equalsIgnoreCase("DEFAULT")) {
       CLASS = "CLASS:PUBLIC";
     }
+     else if (cLASS.equalsIgnoreCase("PRIVATE")) 
+    {
+        CLASS = "CLASS:PRIVATE";
+    }
+    else if 
+    {
+    	System.out.println(cLASS + " Error! Invalid entry. Thus will be classified as Public(default)");
+      CLASS = "CLASS:PUBLIC";
+    }
     else {
       CLASS = "CLASS:PRIVATE";
     }
