@@ -20,13 +20,16 @@ public class iCal {
   private String summary;
   private String DTSTART;
   private String DTEND;
-  private float LAT;
-  private float LON;
   private String title2;
   private String place;
+  // Declare GEO and its associates
   private String GEO;
+  private float LAT;
+  private float LON;
   // Declare Classification
   private String CLASS;
+  // Declare Great Circle Distance
+  private float GCDist;
 
 
   public iCal(String eventTitle, String date, String startTime, String endTime, String location, String sum,
@@ -43,8 +46,23 @@ public class iCal {
     // initialize CLASSIFICATION
     CLASS = Classification(classChoice);
     title2 = eventTitle;
+    //Check to see if there was an event before this one
+    if(isPrevious()) {
+      //If there was a previous event, get the LAT and LON of previous event
+      //and compute the great circle distance
+      
+      //INCOMPLETE: gets the LAT and LON of previous event; to do this, event awareness must be implemented
+      float lat0 = __________.getLAT();
+      float lon0 = __________.getLON();
+      
+    }
   }
-
+  
+  //This function will check if there is a previous event on the same day
+  //Returns true if there was
+  public boolean isPrevious() {
+    //stub
+  }
 
   // Format GEO
   public String latLong(float lat, float lon) {
@@ -124,6 +142,8 @@ public class iCal {
       bw.write(eventBegin);
       bw.write(UID);
       bw.write(GEO);
+      bw.write(LAT);
+      bw.write(LON);
       bw.write(DTSTART);
       bw.write(DTEND);
       bw.write(title);
@@ -212,7 +232,14 @@ public class iCal {
   public String getGEO() {
     return GEO;
   }
+  
+  public float getLAT() {
+    return LAT;
+  }
 
+  public float getLON() {
+    return LON;
+  }
 
   public String getCLASS() {
     return CLASS;
