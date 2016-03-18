@@ -20,7 +20,8 @@ public class iCal {
   private String summary;
   private String DTSTART;
   private String DTEND;
-
+  private float LAT;
+  private float LON;
   private String title2;
   private String place;
   private String GEO;
@@ -36,9 +37,9 @@ public class iCal {
     DTSTART = "DTSTART:" + date + "T" + startTime + "Z" + NL;
     DTEND = "DTEND:" + date + "T" + endTime + "Z" + NL;
     // initialize GEO
-    // GEO = latLong(geo1, geo2);
-    GEO = "GEO:" + geo1 + ";" + geo2 + NL;
-
+    GEO = latLong(geo1, geo2);
+    LAT = geo1;
+    LON = geo2;
     // initialize CLASSIFICATION
     CLASS = Classification(classChoice);
     title2 = eventTitle;
@@ -52,12 +53,12 @@ public class iCal {
     if (lat > 90.0) {
       temp = (lat % 90);
       lat = temp;
-      ret = ret + "+" + lat + ":";
+      ret = ret + lat + ":";
     }
     if (lon > 180) {
       temp = (lon % 180);
       lon = temp;
-      ret = ret + "+" + lon;
+      ret = ret + lon + NL;
     }
     if (lat < -90.0) {
       temp = ((-1 * lat) % 90);
@@ -67,9 +68,9 @@ public class iCal {
     if (lon < -180) {
       temp = ((-1 * lon) % 180);
       lon = -1 * temp;
-      ret = ret + lon;
+      ret = ret + lon + NL;
     }
-    return null;
+    return ret;
 
   }
 
