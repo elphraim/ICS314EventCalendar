@@ -54,7 +54,9 @@ public class iCal {
       //INCOMPLETE: gets the LAT and LON of previous event; to do this, event awareness must be implemented
       float lat0 = __________.getLAT();
       float lon0 = __________.getLON();
-      
+      GCDist = gcdist(lat0, lon0, LAT, LON);
+    } else {
+      GCDist = 0;
     }
   }
   
@@ -89,9 +91,7 @@ public class iCal {
       ret = ret + lon + NL;
     }
     return ret;
-
   }
-
 
   public String Classification(String cLASS) {
     if (cLASS.equalsIgnoreCase("Public")) {
@@ -117,7 +117,16 @@ public class iCal {
     }
     return (CLASS + NL);
   }
-
+  
+  //Function: computes the great circle distance between two events
+  //THIS IS SET TO KILOMETERS
+  public float GCDist(float lat1, float lon1, float lat2, float lon2) {
+    float ret = 0;
+    float abs = lon2 - lon1;
+    ret = 6371 * (Math.acos((Math.sin(lat1) * Math.sin(lat2))
+      + (Math.cos(lat1) * Math.cos(lat2) * Math.cos(Math.abs(abs)))));
+    return ret;
+  }
 
   public void write() {
 
