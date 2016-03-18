@@ -159,6 +159,8 @@ public class iCal {
       bw.write(summary);
       bw.write(place);
       bw.write(CLASS);
+      //NEEDS CHANGE: GCDist should be written to comments section
+      bw.write(GCDist);
       bw.write(eventEnd);
       bw.write(calEnd);
 
@@ -248,6 +250,10 @@ public class iCal {
 
   public float getLON() {
     return LON;
+  }
+  
+  public float getGCD() {
+    return GCDist;
   }
 
   public String getCLASS() {
