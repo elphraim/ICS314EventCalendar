@@ -63,20 +63,36 @@ public class Driver {
           + icsCalendar314.get(i).startTime + "\t||"/* Maybe comment section shows calendar distance thing here */);
     }
   }
-
   
-  private static boolean calDistance() { for(int i = 1; i < icsCalendar314.size() ; i++) { System.out.println(i +
-  "\t" + icsCalendar314.size()); int date1 = Integer.parseInt(icsCalendar314.get(i-1).startDate.trim()); int date2 =
-  Integer.parseInt(icsCalendar314.get(i).startDate.trim());
-  
-  if(date1 == date2) { System.out.println(icsCalendar314.get(i-1).startDate + " and " +
-  icsCalendar314.get(i).startDate + " have matching start dates");
-  
-  //Call calCirDist here }
   
 
   
-  private static double calCirDist(float latitude1, float longitude1, float latitude2, float longitude2) {
-  //Calculate stuff
+  private static boolean calDistance() {
+    for(int i = 1; i < icsCalendar314.size() ; i++) {
+      System.out.println(i + "\t" + icsCalendar314.size());
+      int date1 = Integer.parseInt(icsCalendar314.get(i-1).startDate.trim());
+      int date2 = Integer.parseInt(icsCalendar314.get(i).startDate.trim());
+  
+      if(date1 == date2) {
+        System.out.println(icsCalendar314.get(i-1).startDate + " and " +
+          icsCalendar314.get(i).startDate + " have matching start dates");
+  
+  //Call calCirDist here
+        float GCD = GCDist(icsCalendar314.get(i-1).latitude, icsCalendar314.get(i-1).longitude, 
+          icsCalendar314.get(i).latitude, icsCalendar314.get(i).longitude);
+        System.out.println("\n\tGreat Circle Distance (from last event): " + GCD);
+    
+  }
+  
+
+  //Function: computes the great circle distance between two events
+  //THIS IS SET TO KILOMETERS
+  public float GCDist(float lat1, float lon1, float lat2, float lon2) {
+    float ret = 0;
+    float abs = lon2 - lon1;
+    ret = 6371 * (Math.acos((Math.sin(lat1) * Math.sin(lat2))
+      + (Math.cos(lat1) * Math.cos(lat2) * Math.cos(Math.abs(abs)))));
+    return ret;
+  }
   
 }
