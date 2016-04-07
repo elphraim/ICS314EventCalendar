@@ -44,8 +44,8 @@ public class Driver {
         if (trprompt.promptUser() == false) {
           System.out.println("Error");
         }
-        calDistance();
         printList();
+        calDistance();
         break;
       case 2:
         System.out.println("Goodbye!");
@@ -74,13 +74,14 @@ public class Driver {
       int date2 = Integer.parseInt(icsCalendar314.get(i).startDate.trim());
   
       if(date1 == date2) {
-        System.out.println(icsCalendar314.get(i-1).startDate + " and " +
-          icsCalendar314.get(i).startDate + " have matching start dates");
+        /*System.out.println(icsCalendar314.get(i-1).startDate + " and " +
+          icsCalendar314.get(i).startDate + " have matching start dates");*/
   
   //Call calCirDist here
         float GCD = GCDist(icsCalendar314.get(i-1).latitude, icsCalendar314.get(i-1).longitude, 
           icsCalendar314.get(i).latitude, icsCalendar314.get(i).longitude);
-        System.out.println("\n\tGreat Circle Distance (from last event): " + GCD);
+        System.out.println("\tGreat Circle Distance (from " + icsCalendar314.get(i-1).name +
+          " to " icsCalendar314.get(i).name + "): " + GCD + " Kilometers");
       }
     }
     return true;
