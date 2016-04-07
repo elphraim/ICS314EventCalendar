@@ -44,7 +44,7 @@ public class Driver {
         if (trprompt.promptUser() == false) {
           System.out.println("Error");
         }
-        // calDistance();
+        calDistance();
         printList();
         break;
       case 2:
@@ -64,19 +64,19 @@ public class Driver {
     }
   }
 
-  /*
-   * private static boolean calDistance() { for(int i = 1; i < icsCalendar314.size() ; i++) { System.out.println(i +
-   * "\t" + icsCalendar314.size()); int date1 = Integer.parseInt(icsCalendar314.get(i-1).startDate.trim()); int date2 =
-   * Integer.parseInt(icsCalendar314.get(i).startDate.trim());
-   * 
-   * if(date1 == date2) { System.out.println(icsCalendar314.get(i-1).startDate + " and " +
-   * icsCalendar314.get(i).startDate + " have matching start dates");
-   * 
-   * //Call calCirDist here }
-   */
+  
+  private static boolean calDistance() { for(int i = 1; i < icsCalendar314.size() ; i++) { System.out.println(i +
+  "\t" + icsCalendar314.size()); int date1 = Integer.parseInt(icsCalendar314.get(i-1).startDate.trim()); int date2 =
+  Integer.parseInt(icsCalendar314.get(i).startDate.trim());
+  
+  if(date1 == date2) { System.out.println(icsCalendar314.get(i-1).startDate + " and " +
+  icsCalendar314.get(i).startDate + " have matching start dates");
+  
+  //Call calCirDist here }
+  
 
-  /*
-   * private static double calCirDist(float latitude1, float longitude1, float latitude2, float longitude2) {
-   * //Calculate stuff
-   */
+  
+  private static double calCirDist(float latitude1, float longitude1, float latitude2, float longitude2) {
+  //Calculate stuff
+  
 }
