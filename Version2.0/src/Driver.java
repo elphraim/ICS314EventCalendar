@@ -93,9 +93,9 @@ public class Driver {
   //THIS IS SET TO KILOMETERS
   public static float GCDist(float lat1, float lon1, float lat2, float lon2) {
     float ret = 0;
-    float abs = lon2 - lon1;
+    float dif = lon2 - lon1;
     ret = (float) (6371 * (Math.acos((Math.sin(lat1) * Math.sin(lat2))
-      + (Math.cos(lat1) * Math.cos(lat2) * Math.cos(Math.abs(abs))))));
+      + (Math.cos(lat1) * Math.cos(lat2) * Math.cos(Math.abs(dif)))))/(2* Math.PI));
     return ret;
   }
   
