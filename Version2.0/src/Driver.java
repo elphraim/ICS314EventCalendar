@@ -81,7 +81,7 @@ public class Driver {
         float GCD = GCDist(icsCalendar314.get(i-1).latitude, icsCalendar314.get(i-1).longitude, 
           icsCalendar314.get(i).latitude, icsCalendar314.get(i).longitude);
         System.out.println("\tGreat Circle Distance (from " + icsCalendar314.get(i-1).name +
-          " to " icsCalendar314.get(i).name + "): " + GCD + " Kilometers");
+          " to " + icsCalendar314.get(i).name + "): " + GCD + " Kilometers");
       }
     }
     return true;
