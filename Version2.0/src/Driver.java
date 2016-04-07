@@ -81,17 +81,20 @@ public class Driver {
         float GCD = GCDist(icsCalendar314.get(i-1).latitude, icsCalendar314.get(i-1).longitude, 
           icsCalendar314.get(i).latitude, icsCalendar314.get(i).longitude);
         System.out.println("\n\tGreat Circle Distance (from last event): " + GCD);
+      }
+    }
+    return true;
     
   }
   
 
   //Function: computes the great circle distance between two events
   //THIS IS SET TO KILOMETERS
-  public float GCDist(float lat1, float lon1, float lat2, float lon2) {
+  public static float GCDist(float lat1, float lon1, float lat2, float lon2) {
     float ret = 0;
     float abs = lon2 - lon1;
-    ret = 6371 * (Math.acos((Math.sin(lat1) * Math.sin(lat2))
-      + (Math.cos(lat1) * Math.cos(lat2) * Math.cos(Math.abs(abs)))));
+    ret = (float) (6371 * (Math.acos((Math.sin(lat1) * Math.sin(lat2))
+      + (Math.cos(lat1) * Math.cos(lat2) * Math.cos(Math.abs(abs))))));
     return ret;
   }
   
