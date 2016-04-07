@@ -92,10 +92,10 @@ public class Driver {
   //Function: computes the great circle distance between two events
   //THIS IS SET TO KILOMETERS
   public static float GCDist(float lat1, float lon1, float lat2, float lon2) {
-    float ret = 0;
-    float dif = lon2 - lon1;
-    ret = (float) (6371 * (Math.acos((Math.sin(lat1) * Math.sin(lat2))
-      + (Math.cos(lat1) * Math.cos(lat2) * Math.cos(Math.abs(dif)))))/(2* Math.PI));
+	float ret = 0;
+    float difLon = (float) Math.abs(Math.toRadians(lon1) - Math.toRadians(lon2));
+    ret = (float) (6371 * (Math.acos((Math.sin(Math.toRadians(lat1)) * Math.sin(Math.toRadians(lat2)))
+      + (Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2)) * Math.cos(Math.abs(difLon))))));
     return ret;
   }
   
