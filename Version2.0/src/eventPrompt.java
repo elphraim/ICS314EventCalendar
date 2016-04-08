@@ -57,5 +57,8 @@ public class eventPrompt {
     // Get user input for an end time
     System.out.println("Please enter an end time in 24 hour time in the following format hhmmss: ");
     newEvent.setEndTime(sc.nextLine());
+    
+    //input the great circle distance(computed in Driver.java) into comment field
+		newEvent.setComment(Driver.distance());
   }
 }
