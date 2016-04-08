@@ -80,8 +80,9 @@ public class Driver {
   //Call calCirDist here
         float GCD = GCDist(icsCalendar314.get(i-1).latitude, icsCalendar314.get(i-1).longitude, 
           icsCalendar314.get(i).latitude, icsCalendar314.get(i).longitude);
+          double GCDmiles = GCD / 1.609344;
         System.out.println("\tGreat Circle Distance (from " + icsCalendar314.get(i-1).name +
-          " to " + icsCalendar314.get(i).name + "): " + GCD + " Kilometers");
+          " to " + icsCalendar314.get(i).name + "): " + GCD + " Kilometers" + "/ " + GCDmiles +" Miles");
       }
     }
     return true;
@@ -97,6 +98,36 @@ public class Driver {
     ret = (float) (6371 * (Math.acos((Math.sin(Math.toRadians(lat1)) * Math.sin(Math.toRadians(lat2)))
       + (Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2)) * Math.cos(Math.abs(difLon))))));
     return ret;
+  }
+  //Method: computes the greate circle between two events and saves results into a String (to add to comment field)*/
+  public static String distance()
+  {
+	  String CompDist = "";
+	  for(int i = 1; i < icsCalendar314.size() ; i++) 
+	  {
+		     
+	      int date1 = Integer.parseInt(icsCalendar314.get(i-1).startDate.trim());
+	      int date2 = Integer.parseInt(icsCalendar314.get(i).startDate.trim());
+	  
+	      if(date1 == date2) {
+	        /*System.out.println(icsCalendar314.get(i-1).startDate + " and " +
+	          icsCalendar314.get(i).startDate + " have matching start dates");*/
+	      
+	      //Call calCirDist here
+		    float GCD = GCDist(icsCalendar314.get(i-1).latitude, icsCalendar314.get(i-1).longitude, 
+		    	      icsCalendar314.get(i).latitude, icsCalendar314.get(i).longitude);
+		    	    double GCDmiles = GCD / 1.609344;
+		    		 
+		  CompDist =  ("\tGreat Circle Distance (from " + icsCalendar314.get(i-1).name +
+		    	      " to " + icsCalendar314.get(i).name + "): " + GCD + " Kilometers" + "/ " + GCDmiles +" Miles");
+	      }
+	      else
+	      {
+	    	  CompDist = "";
+	      }
+	  }
+	  
+	  return(CompDist);
   }
   
 }
