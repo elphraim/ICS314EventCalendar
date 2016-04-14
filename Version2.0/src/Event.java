@@ -13,10 +13,11 @@ public class Event {
   public String name; /* name of the event */
   public String location; /* location of the event */
   public String address; /* address of the event */
+  public boolean isLat;
   public float latitude; /* latitude of the event */
   public float longitude; /* longitude of the event */
   public String description; /* description of the event */
-  public String comment; // idk
+  public String comment; //idk
   public String startDate; /* start date of the event */
   public String endDate; /* end date of the event */
   public String startTime; /* start time of the event */
@@ -83,37 +84,16 @@ public class Event {
             + "\nBEGIN:VTIMEZONE\nTZID:Pacific/Honolulu\n"
             + "BEGIN:DAYLIGHT\nTZOFFSETFROM:-1030\nDTSTART:19330430T020000\nTZNAME:HDT\nTZOFFSETTO:-0930\nRDATE:19330430T020000\n"
             + "RDATE:19420209T020000\nEND:DAYLIGHT\nBEGIN:STANDARD\nTZOFFSETFROM:-1030\nDTSTART:19470608T020000\nTZNAME:HST\n"
-            + "TZOFFSETTO:-1000\nRDATE:19470608T020000\nEND:STANDARD\nEND:VTIMEZONE" + "\nBEGIN:VEVENT" + "\nCLASS:"
-            + classification
-            + "\nSUMMARY"
-            + name
-            + "\nCREATED:"
-            + currentDate
-            + "T"
-            + currentTime
-            + "Z\nUID:"
-            + UID
-            + "\nDTEND;TZID=Pacific/Honolulu:"
-            + endDate
-            + "T"
-            + endTime
-            + "\nDTSTART;TZID=Pacific/Honolulu:"
-            + startDate
-            + "T"
-            + startTime
-            + "\nDTSTAMP:"
-            + startDate
-            + "T"
-            + startTime
-            + "Z"
-            + "\nLOCATION:"
-            + address
-            + "\nGEO:"
-            + latitude
-            + ";"
-            + longitude
-            + "\nDESCRIPTION:"
-            + description
+            + "TZOFFSETTO:-1000\nRDATE:19470608T020000\nEND:STANDARD\nEND:VTIMEZONE" 
+            + "\nBEGIN:VEVENT"
+            + "\nCLASS:" + classification
+            + "\nSUMMARY" + name
+            + "\nCREATED:" + currentDate + "T" + currentTime + "Z\nUID:" + UID
+            + "\nDTEND;TZID=Pacific/Honolulu:" + endDate + "T" + endTime
+            + "\nDTSTART;TZID=Pacific/Honolulu:" + startDate + "T" + startTime
+            + "\nDTSTAMP:" + startDate + "T" + startTime + "Z" + "\nLOCATION:" + address
+            + "\nGEO:" + latitude + ";" + longitude
+            + "\nDESCRIPTION:" + description
             + "\nCOMMENT:"
             + "\nEND:VEVENT\nEND:VCALENDAR";
     return content;
@@ -235,6 +215,16 @@ public class Event {
   public void setLatitude(float latitude) {
     this.latitude = latitude;
   }
+  
+  /*Returns true if lat/lon have been set*/
+  public boolean getIsLat() {
+	  return isLat;
+  }
+  
+  /*Sets whether lat/lon coordinates have been given */
+  public void setIsLat(Boolean boo) {
+	  this.isLat = boo;
+  }
 
 
   /* returns the longitude of the event */
@@ -259,8 +249,7 @@ public class Event {
   public void setDescription(String description) {
     this.description = description;
   }
-
-
+  
   /* returns the comment of the event */
   public String getComment() {
     return description;
