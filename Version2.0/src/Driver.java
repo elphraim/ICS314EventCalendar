@@ -73,7 +73,7 @@ public class Driver {
       int date1 = Integer.parseInt(icsCalendar314.get(i-1).startDate.trim());
       int date2 = Integer.parseInt(icsCalendar314.get(i).startDate.trim());
   
-      if(date1 == date2) {
+      if(date1 == date2 && icsCalendar314.get(i-1).getIsLat() && icsCalendar314.get(i).getIsLat()) {
         /*System.out.println(icsCalendar314.get(i-1).startDate + " and " +
           icsCalendar314.get(i).startDate + " have matching start dates");*/
   
@@ -109,7 +109,7 @@ public class Driver {
 	      int date1 = Integer.parseInt(icsCalendar314.get(i-1).startDate.trim());
 	      int date2 = Integer.parseInt(icsCalendar314.get(i).startDate.trim());
 	  
-	      if(date1 == date2) {
+	      if(date1 == date2 && icsCalendar314.get(i-1).getIsLat() && icsCalendar314.get(i).getIsLat()) {
 	        /*System.out.println(icsCalendar314.get(i-1).startDate + " and " +
 	          icsCalendar314.get(i).startDate + " have matching start dates");*/
 	      
