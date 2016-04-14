@@ -40,6 +40,12 @@ public class eventPrompt {
       // gets user input for the longitude of the location
       System.out.println("Please enter the longitude of the location: ");
       newEvent.setLongitude(sc1.nextFloat());
+      
+      //Set marker saying lat/lon have been set
+      newEvent.setIsLat(true);
+    } else {
+    	//Set marker saying lat/lon have not been set
+    	newEvent.setIsLat(false);
     }
 
     // Get user input for a start date
