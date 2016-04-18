@@ -40,10 +40,15 @@ public class Driver {
         }
         break;
       case 1:
-        listPrompt trprompt = new listPrompt();
-        if (trprompt.promptUser() == false) {
-          System.out.println("Error");
+        try {
+          listPrompt trprompt = new listPrompt();
+          if (trprompt.promptUser() == false) {
+            System.out.println("Error");
         }
+      }
+      catch (NullPointerException e) {
+        System.out.println("Empty List.. Add an event");
+      }
         printList();
         calDistance();
         break;
