@@ -29,6 +29,8 @@ public class eventPrompt {
    * @param newEvent
    */
   public void PromptUser(Event newEvent) {
+    //boolean that will check if user inputted lat/long info
+	  boolean checkLatLong = true;
     // gets user input for a name
     System.out.println("Please enter an event name: ");
     newEvent.setName(sc.nextLine());
@@ -62,6 +64,7 @@ public class eventPrompt {
     else {
       // Set marker saying lat/lon have not been set
       newEvent.setIsLat(false);
+        checkLatLong = false;
     }
 
     // Get user input for a start date
@@ -101,7 +104,20 @@ public class eventPrompt {
     }
 
     // input the great circle distance(computed in Driver.java) into comment field
-    newEvent.setComment(Driver.distance());
+     
+    if(Driver.calDistance()== true)
+    {
+    	newEvent.setComment(Driver.distance());
+    	if(checkLatLong == false)
+    	{
+    		newEvent.setComment("Missing Latitude/Longitude info to calculate GCD");
+    	}
+    }
+       else
+       {
+        newEvent.setComment("You have no other events today");
+       }
+  }
   }
 
 
