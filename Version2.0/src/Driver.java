@@ -5,6 +5,13 @@ public class Driver {
   static ArrayList<Event> icsCalendar314;
 
 
+  /**
+   * Event Calendar Main
+   * 
+   * @author Dan Paguirigan
+   * @author Eri Ane
+   * @author Spencer Luther
+   */
   public static void main(String[] args) {
     Scanner scan = new Scanner(System.in);
     boolean cont = true;
@@ -44,11 +51,11 @@ public class Driver {
           listPrompt trprompt = new listPrompt();
           if (trprompt.promptUser() == false) {
             System.out.println("Error");
+          }
         }
-      }
-      catch (NullPointerException e) {
-        System.out.println("Empty List.. Add an event");
-      }
+        catch (NullPointerException e) {
+          System.out.println("Empty List.. Add an event");
+        }
         printList();
         calDistance();
         break;
@@ -62,77 +69,100 @@ public class Driver {
   }
 
 
+  /**
+   * printList
+   * 
+   * Prints sorted events
+   */
   private static void printList() {
     for (int i = 0; i < icsCalendar314.size(); i++) {
       System.out.println(icsCalendar314.get(i).name + "\t" + icsCalendar314.get(i).startDate + "\t"
           + icsCalendar314.get(i).startTime + "\t||"/* Maybe comment section shows calendar distance thing here */);
     }
   }
-  
-  
 
-  
+/**
+ * calDistance
+ * 
+ * Calculates and prints distance between events
+ * @return true
+ */
   private static boolean calDistance() {
-    for(int i = 1; i < icsCalendar314.size() ; i++) {
+    for (int i = 1; i < icsCalendar314.size(); i++) {
       System.out.println(i + "\t" + icsCalendar314.size());
-      int date1 = Integer.parseInt(icsCalendar314.get(i-1).startDate.trim());
+      int date1 = Integer.parseInt(icsCalendar314.get(i - 1).startDate.trim());
       int date2 = Integer.parseInt(icsCalendar314.get(i).startDate.trim());
-  
-      if(date1 == date2 && icsCalendar314.get(i-1).getIsLat() && icsCalendar314.get(i).getIsLat()) {
-        /*System.out.println(icsCalendar314.get(i-1).startDate + " and " +
-          icsCalendar314.get(i).startDate + " have matching start dates");*/
-  
-  //Call calCirDist here
-        float GCD = GCDist(icsCalendar314.get(i-1).latitude, icsCalendar314.get(i-1).longitude, 
-          icsCalendar314.get(i).latitude, icsCalendar314.get(i).longitude);
-          double GCDmiles = GCD / 1.609344;
-        System.out.println("\tGreat Circle Distance (from " + icsCalendar314.get(i-1).name +
-          " to " + icsCalendar314.get(i).name + "): " + GCD + " Kilometers" + "/ " + GCDmiles +" Miles");
+
+      if (date1 == date2 && icsCalendar314.get(i - 1).getIsLat() && icsCalendar314.get(i).getIsLat()) {
+        /*
+         * System.out.println(icsCalendar314.get(i-1).startDate + " and " + icsCalendar314.get(i).startDate +
+         * " have matching start dates");
+         */
+
+        // Call calCirDist here
+        float GCD =
+            GCDist(icsCalendar314.get(i - 1).latitude, icsCalendar314.get(i - 1).longitude,
+                icsCalendar314.get(i).latitude, icsCalendar314.get(i).longitude);
+        double GCDmiles = GCD / 1.609344;
+        System.out.println("\tGreat Circle Distance (from " + icsCalendar314.get(i - 1).name + " to "
+            + icsCalendar314.get(i).name + "): " + GCD + " Kilometers" + "/ " + GCDmiles + " Miles");
       }
     }
     return true;
-    
-  }
-  
 
-  //Function: computes the great circle distance between two events
-  //THIS IS SET TO KILOMETERS
+  }
+
+/**
+ * GCDist
+ * 
+ * computes the great circle distance between two events
+ * THIS IS SET TO KILOMETERS
+ */
   public static float GCDist(float lat1, float lon1, float lat2, float lon2) {
-	float ret = 0;
+    float ret = 0;
     float difLon = (float) Math.abs(Math.toRadians(lon1) - Math.toRadians(lon2));
-    ret = (float) (6371 * (Math.acos((Math.sin(Math.toRadians(lat1)) * Math.sin(Math.toRadians(lat2)))
-      + (Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2)) * Math.cos(Math.abs(difLon))))));
+    ret =
+        (float) (6371 * (Math.acos((Math.sin(Math.toRadians(lat1)) * Math.sin(Math.toRadians(lat2)))
+            + (Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2)) * Math.cos(Math.abs(difLon))))));
     return ret;
   }
-  //Method: computes the greate circle between two events and saves results into a String (to add to comment field)*/
-  public static String distance()
-  {
-	  String CompDist = "";
-	  for(int i = 1; i < icsCalendar314.size() ; i++) 
-	  {
-		     
-	      int date1 = Integer.parseInt(icsCalendar314.get(i-1).startDate.trim());
-	      int date2 = Integer.parseInt(icsCalendar314.get(i).startDate.trim());
-	  
-	      if(date1 == date2 && icsCalendar314.get(i-1).getIsLat() && icsCalendar314.get(i).getIsLat()) {
-	        /*System.out.println(icsCalendar314.get(i-1).startDate + " and " +
-	          icsCalendar314.get(i).startDate + " have matching start dates");*/
-	      
-	      //Call calCirDist here
-		    float GCD = GCDist(icsCalendar314.get(i-1).latitude, icsCalendar314.get(i-1).longitude, 
-		    	      icsCalendar314.get(i).latitude, icsCalendar314.get(i).longitude);
-		    	    double GCDmiles = GCD / 1.609344;
-		    		 
-		  CompDist =  ("\tGreat Circle Distance (from " + icsCalendar314.get(i-1).name +
-		    	      " to " + icsCalendar314.get(i).name + "): " + GCD + " Kilometers" + "/ " + GCDmiles +" Miles");
-	      }
-	      else
-	      {
-	    	  CompDist = "";
-	      }
-	  }
-	  
-	  return(CompDist);
+
+
+  /**
+   * distance
+   * 
+   * computes the great circle between two events and saves results into a String (to add to comment field)
+   * @return string
+   */
+  public static String distance() {
+    String CompDist = "";
+    for (int i = 1; i < icsCalendar314.size(); i++) {
+
+      int date1 = Integer.parseInt(icsCalendar314.get(i - 1).startDate.trim());
+      int date2 = Integer.parseInt(icsCalendar314.get(i).startDate.trim());
+
+      if (date1 == date2 && icsCalendar314.get(i - 1).getIsLat() && icsCalendar314.get(i).getIsLat()) {
+        /*
+         * System.out.println(icsCalendar314.get(i-1).startDate + " and " + icsCalendar314.get(i).startDate +
+         * " have matching start dates");
+         */
+
+        // Call calCirDist here
+        float GCD =
+            GCDist(icsCalendar314.get(i - 1).latitude, icsCalendar314.get(i - 1).longitude,
+                icsCalendar314.get(i).latitude, icsCalendar314.get(i).longitude);
+        double GCDmiles = GCD / 1.609344;
+
+        CompDist =
+            ("\tGreat Circle Distance (from " + icsCalendar314.get(i - 1).name + " to " + icsCalendar314.get(i).name
+                + "): " + GCD + " Kilometers" + "/ " + GCDmiles + " Miles");
+      }
+      else {
+        CompDist = "";
+      }
+    }
+
+    return (CompDist);
   }
-  
+
 }

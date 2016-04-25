@@ -1,5 +1,14 @@
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Scanner;
 
+/**
+ * Input/Output User Interface
+ * 
+ * @author Dan Paguirigan
+ * @author Eri Ane
+ * @author Spencer Luther
+ */
 public class eventPrompt {
   Scanner sc; // String Inputs
   Scanner sc1; // Float Inputs
@@ -12,10 +21,16 @@ public class eventPrompt {
   }
 
 
-  /* creates a new event and assigns it user input */
+  /**
+   * PromptUser
+   * 
+   * creates a new event and assigns inputed information
+   * 
+   * @param newEvent
+   */
   public void PromptUser(Event newEvent) {
     // gets user input for a name
-    System.out.println("Please enter an event name(only letters): ");
+    System.out.println("Please enter an event name: ");
     newEvent.setName(sc.nextLine());
 
     // gets user input for classification
@@ -40,31 +55,90 @@ public class eventPrompt {
       // gets user input for the longitude of the location
       System.out.println("Please enter the longitude of the location: ");
       newEvent.setLongitude(sc1.nextFloat());
-      
-      //Set marker saying lat/lon have been set
+
+      // Set marker saying lat/lon have been set
       newEvent.setIsLat(true);
-    } else {
-    	//Set marker saying lat/lon have not been set
-    	newEvent.setIsLat(false);
+    }
+    else {
+      // Set marker saying lat/lon have not been set
+      newEvent.setIsLat(false);
     }
 
     // Get user input for a start date
     System.out.println("Please enter a start date in the following format yyyymmdd: ");
-    newEvent.setStartDate(sc.nextLine());
+    String dateStart = sc.nextLine();
+    newEvent.setStartDate(dateStart);
+    while (!checkDate(dateStart)) {
+      System.out.println("Invalid date! Please use date format yyyymmdd: ");
+      dateStart = sc.nextLine();
+    }
 
     // Get user input for an end date
     System.out.println("Please enter an end date in the following format yyyymmdd: ");
-    newEvent.setEndDate(sc.nextLine());
+    String dateEnd = sc.nextLine();
+    newEvent.setEndDate(dateEnd);
+    while (!checkDate(dateStart)) {
+      System.out.println("Invalid date! Please use date format yyyymmdd: ");
+      dateStart = sc.nextLine();
+    }
 
     // Get user input for a start time
     System.out.println("Please enter a start time in 24 hour time in the following format hhmmss: ");
-    newEvent.setStartTime(sc.nextLine());
+    String startTime = sc.nextLine();
+    newEvent.setStartTime(startTime);
+    while (!checkTime(startTime)) {
+      System.out.println("Invalid time! Please use time format hhmmss: ");
+      startTime = sc.nextLine();
+    }
 
     // Get user input for an end time
     System.out.println("Please enter an end time in 24 hour time in the following format hhmmss: ");
-    newEvent.setEndTime(sc.nextLine());
-    
-    //input the great circle distance(computed in Driver.java) into comment field
-		newEvent.setComment(Driver.distance());
+    String endTime = sc.nextLine();
+    newEvent.setEndTime(endTime);
+    while (!checkTime(endTime)) {
+      System.out.println("Invalid time! Please use time format hhmmss: ");
+      endTime = sc.nextLine();
+    }
+
+    // input the great circle distance(computed in Driver.java) into comment field
+    newEvent.setComment(Driver.distance());
+  }
+
+
+  /**
+   * Error checking for time
+   * 
+   * @param input time
+   * @return true if string matches format
+   */
+  public static boolean checkTime(String time) {
+    SimpleDateFormat formatTime = new SimpleDateFormat("HHmmss");
+    formatTime.setLenient(false);
+    try {
+      formatTime.parse(time.trim());
+    }
+    catch (ParseException e) {
+      return false;
+    }
+    return true;
+  }
+
+
+  /**
+   * Error checking for date
+   * 
+   * @param input date
+   * @return true if string matches format
+   */
+  public static boolean checkDate(String date) {
+    SimpleDateFormat formatTime = new SimpleDateFormat("yyyyMMdd");
+    formatTime.setLenient(false);
+    try {
+      formatTime.parse(date.trim());
+    }
+    catch (ParseException e) {
+      return false;
+    }
+    return true;
   }
 }

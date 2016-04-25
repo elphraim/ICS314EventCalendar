@@ -6,32 +6,38 @@ import java.util.Calendar;
 import java.util.TimeZone;
 import java.util.UUID;
 
+/**
+ * Represents a event object
+ * 
+ * @author Dan Paguirigan
+ * @author Eri Ane
+ * @author Spencer Luther
+ */
 public class Event {
-  public String currentDate;
-  public String currentTime;
-  public String classification; /* type of event: public, private */
-  public String name; /* name of the event */
-  public String location; /* location of the event */
   public String address; /* address of the event */
-  public boolean isLat;
+  public String classification; /* type of event: public, private */
+  public String comment; /* comment field for event */
+  public String currentDate; /* date stamp for event */
+  public String currentTime; /* time stamp for event */
+  public String description; /* description of the event */
+  public String endDate; /* end date of the event */
+  public String endTime; /* end time of the event */
+  public boolean isLat; /* if coordinates added */
   public float latitude; /* latitude of the event */
   public float longitude; /* longitude of the event */
-  public String description; /* description of the event */
-  public String comment; //idk
+  public String location; /* location of the event */
+  public String name; /* name of the event */
   public String startDate; /* start date of the event */
-  public String endDate; /* end date of the event */
   public String startTime; /* start time of the event */
-  public String endTime; /* end time of the event */
   public String UID; /* unique ID of the event */
 
 
-  /* creates an event */
   public Event() {
     UID = UUID.randomUUID().toString().toUpperCase();
     TimeZone tmz = TimeZone.getTimeZone("UTC");
     Calendar cal = Calendar.getInstance(tmz);
 
-    /* get time */
+    /* get time stamp */
     int hour = cal.get(Calendar.HOUR);
     int minute = cal.get(Calendar.MINUTE);
     int second = cal.get(Calendar.SECOND);
@@ -53,7 +59,7 @@ public class Event {
     else
       currentTime += "" + second;
 
-    /* get date */
+    /* get date stamp */
     int year = cal.get(Calendar.YEAR);
     int month = cal.get(Calendar.MONTH);
     int day = cal.get(Calendar.DAY_OF_MONTH);
@@ -76,36 +82,46 @@ public class Event {
       currentDate += "" + day;
   }
 
-
+/**
+ * Builds event file information
+ * @return string
+ */
   private String createContent() {
     String content =
         "BEGIN:VCALENDAR\nVERSION:2.0"
             + "PRODID://TeamVinte/luther/eane/danp/ICS314//"
             + "\nBEGIN:VTIMEZONE\nTZID:Pacific/Honolulu\n"
-            + "BEGIN:DAYLIGHT\nTZOFFSETFROM:-1030\nDTSTART:19330430T020000\nTZNAME:HDT\nTZOFFSETTO:-0930\nRDATE:19330430T020000\n"
-            + "RDATE:19420209T020000\nEND:DAYLIGHT\nBEGIN:STANDARD\nTZOFFSETFROM:-1030\nDTSTART:19470608T020000\nTZNAME:HST\n"
-            + "TZOFFSETTO:-1000\nRDATE:19470608T020000\nEND:STANDARD\nEND:VTIMEZONE" 
+            + "BEGIN:DAYLIGHT" 
+            + "\nTZOFFSETFROM:-1030\nDTSTART:19430430T020000\nTZNAME:HDT\nTZOFFSETTO:-0930\nRDATE:19430430T020000\n"
+            + "RDATE:19220209T020000\nEND:DAYLIGHT" 
+            + "\nBEGIN:STANDARD" 
+            + "\nTZNAME:HST\nTZOFFSETFROM:-1030\nDTSTART:19550607T020000\n"
+            + "TZOFFSETTO:-1000\nRDATE:19550607T020000\nEND:STANDARD\nEND:VTIMEZONE" 
             + "\nBEGIN:VEVENT"
             + "\nCLASS:" + classification
-            + "\nSUMMARY" + name
+            + "\nSUMMARY:" + name
             + "\nCREATED:" + currentDate + "T" + currentTime + "Z\nUID:" + UID
-            + "\nDTEND;TZID=Pacific/Honolulu:" + endDate + "T" + endTime
             + "\nDTSTART;TZID=Pacific/Honolulu:" + startDate + "T" + startTime
+            + "\nDTEND;TZID=Pacific/Honolulu:" + endDate + "T" + endTime
             + "\nDTSTAMP:" + startDate + "T" + startTime + "Z" + "\nLOCATION:" + address
             + "\nGEO:" + latitude + ";" + longitude
             + "\nDESCRIPTION:" + description
-            + "\nCOMMENT:"
+            + "\nCOMMENT:" + comment
             + "\nEND:VEVENT\nEND:VCALENDAR";
     return content;
   }
 
-
+/**
+ * Creates directory on Desktop
+ * for .ICS files
+ * @return true if file was created
+ */
   public boolean createFile() {
-    System.out.println("Generating Event File...");
+    String filename = name + ".ics";
     String foldername = "Calendar-Files";
     String userHome = System.getProperty("user.home") + "/Desktop/";
-    String filename = name + ".ics";
 
+    System.out.println("Generating Event File...");
     try {
       File folder = new File(userHome, foldername);
 
@@ -114,15 +130,15 @@ public class Event {
         folder.mkdir();
       }
 
-      // change file location based on local system
+      // change file location
       File file = new File(userHome + "/" + foldername, filename);
 
-      // if file doesn't exists, then create it
+      // if file does not exist, create it
       if (!file.exists()) {
         file.createNewFile();
       }
 
-      // write the content string to the file
+      // write the content string to the event file
       FileWriter fw = new FileWriter(file.getAbsoluteFile());
       BufferedWriter bw = new BufferedWriter(fw);
       bw.write(createContent());
@@ -134,36 +150,36 @@ public class Event {
     return true;
   }
 
-
+/*returns classification of event */
   public String getClassification() {
     return classification;
   }
 
-
+/* sets classification of event */
   public void setClassification(String classification) {
     this.classification = classification;
   }
 
 
-  /* returns current date of event */
+  /* returns current date */
   public String getCurrentDate() {
     return currentDate;
   }
 
 
-  /* reassigns current date of event */
+  /* sets current date */
   public void setCurrentDate(String currentDate) {
     this.currentDate = currentDate;
   }
 
 
-  /* returns current time of event */
+  /* returns current time */
   public String getCurrentTime() {
     return currentTime;
   }
 
 
-  /* reassigns current time of event */
+  /* sets current time of event */
   public void setCurrentTime(String currentTime) {
     this.currentTime = currentTime;
   }
@@ -175,7 +191,7 @@ public class Event {
   }
 
 
-  /* reassigns the name of the event */
+  /* sets the name of the event */
   public void setName(String name) {
     this.name = name;
   }
@@ -187,7 +203,7 @@ public class Event {
   }
 
 
-  /* reassigns the location of the event */
+  /* sets the location of the event */
   public void setLocation(String location) {
     this.location = location;
   }
@@ -199,7 +215,7 @@ public class Event {
   }
 
 
-  /* reassigns the address of the event */
+  /* sets the address of the event */
   public void setAddress(String address) {
     this.address = address;
   }
@@ -211,17 +227,17 @@ public class Event {
   }
 
 
-  /* reassigns the latitude of the event */
+  /* sets the latitude of the event */
   public void setLatitude(float latitude) {
     this.latitude = latitude;
   }
   
-  /*Returns true if lat/lon have been set*/
+  /* returns true if lat/lon have been set*/
   public boolean getIsLat() {
 	  return isLat;
   }
   
-  /*Sets whether lat/lon coordinates have been given */
+  /* sets whether lat/lon coordinates have been given */
   public void setIsLat(Boolean boo) {
 	  this.isLat = boo;
   }
@@ -233,7 +249,7 @@ public class Event {
   }
 
 
-  /* reassigns the longitude of the event */
+  /* sets the longitude of the event */
   public void setLongitude(float longitude) {
     this.longitude = longitude;
   }
@@ -245,7 +261,7 @@ public class Event {
   }
 
 
-  /* reassigns the description of the event */
+  /* sets the description of the event */
   public void setDescription(String description) {
     this.description = description;
   }
@@ -256,7 +272,7 @@ public class Event {
   }
 
 
-  /* reassigns the description of the event */
+  /* sets the description of the event */
   public void setComment(String comment) {
     this.comment = comment;
   }
@@ -268,7 +284,7 @@ public class Event {
   }
 
 
-  /* reassigns the start date of the event */
+  /* sets the start date of the event */
   public void setStartDate(String startDate) {
     this.startDate = startDate;
   }
@@ -280,7 +296,7 @@ public class Event {
   }
 
 
-  /* reassigns the end date of the event */
+  /* sets the end date of the event */
   public void setEndDate(String endDate) {
     this.endDate = endDate;
   }
@@ -292,7 +308,7 @@ public class Event {
   }
 
 
-  /* reassigns the start time of the event */
+  /* sets the start time of the event */
   public void setStartTime(String startTime) {
     this.startTime = startTime;
   }
@@ -304,7 +320,7 @@ public class Event {
   }
 
 
-  /* reassigns the end time of the event */
+  /* sets the end time of the event */
   public void setEndTime(String endTime) {
     this.endTime = endTime;
   }
@@ -316,7 +332,7 @@ public class Event {
   }
 
 
-  /* reassigns the UID of the event */
+  /* sets the UID of the event */
   public void setUID(String UID) {
     this.UID = UID;
   }
