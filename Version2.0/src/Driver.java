@@ -87,7 +87,7 @@ public class Driver {
  * Calculates and prints distance between events
  * @return true
  */
-  private static boolean calDistance() {
+  public static boolean calDistance() {
     for (int i = 1; i < icsCalendar314.size(); i++) {
       System.out.println(i + "\t" + icsCalendar314.size());
       int date1 = Integer.parseInt(icsCalendar314.get(i - 1).startDate.trim());
