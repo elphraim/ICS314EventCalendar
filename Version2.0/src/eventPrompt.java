@@ -118,7 +118,7 @@ public class eventPrompt {
         newEvent.setComment("You have no other events today");
        }
   }
-  }
+  
 
 
   /**
