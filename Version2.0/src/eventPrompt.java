@@ -74,15 +74,17 @@ public class eventPrompt {
     while (!checkDate(dateStart)) {
       System.out.println("Invalid date! Please use date format yyyymmdd: ");
       dateStart = sc.nextLine();
+      newEvent.setStartDate(dateStart);
     }
 
     // Get user input for an end date
     System.out.println("Please enter an end date in the following format yyyymmdd: ");
     String dateEnd = sc.nextLine();
     newEvent.setEndDate(dateEnd);
-    while (!checkDate(dateStart)) {
+    while (!checkDate(dateEnd)) {
       System.out.println("Invalid date! Please use date format yyyymmdd: ");
-      dateStart = sc.nextLine();
+      dateEnd = sc.nextLine();
+      newEvent.setEndDate(dateEnd);
     }
 
     // Get user input for a start time
@@ -92,6 +94,7 @@ public class eventPrompt {
     while (!checkTime(startTime)) {
       System.out.println("Invalid time! Please use time format hhmmss: ");
       startTime = sc.nextLine();
+      newEvent.setStartTime(startTime);
     }
 
     // Get user input for an end time
@@ -101,6 +104,7 @@ public class eventPrompt {
     while (!checkTime(endTime)) {
       System.out.println("Invalid time! Please use time format hhmmss: ");
       endTime = sc.nextLine();
+      newEvent.setEndTime(endTime);
     }
 
     // input the great circle distance(computed in Driver.java) into comment field
