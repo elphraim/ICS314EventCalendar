@@ -156,6 +156,9 @@ public class Driver {
         CompDist =
             ("\tGreat Circle Distance (from " + icsCalendar314.get(i - 1).name + " to " + icsCalendar314.get(i).name
                 + "): " + GCD + " Kilometers" + "/ " + GCDmiles + " Miles");
+        
+        icsCalendar314.get(i-1).comment = CompDist;
+        icsCalendar314.get(i-1).createFile();
       }
       else {
         CompDist = "";
