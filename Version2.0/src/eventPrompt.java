@@ -29,42 +29,42 @@ public class eventPrompt {
    * @param newEvent
    */
   public void PromptUser(Event newEvent) {
-    //boolean that will check if user inputted lat/long info
-	  boolean checkLatLong = true;
-    // gets user input for a name
+    // boolean that will check if user inputted lat/long info
+    boolean checkLatLong = true;
+    // user input for a name
     System.out.println("Please enter an event name: ");
     newEvent.setName(sc.nextLine());
 
-    // gets user input for classification
+    // user input for classification
     System.out.println("What is the classification of the event? (private/public)");
     newEvent.setClassification(sc.nextLine().toUpperCase());
 
-    // gets user input for a name of location
+    // user input for a location
     System.out.println("Please enter a location name: ");
     newEvent.setLocation(sc.nextLine());
 
-    // gets user input for the address of the location
+    // user input for the address of the location
     System.out.println("Please enter the address of the location: ");
     newEvent.setAddress(sc.nextLine());
 
-    System.out.println("Do you have the latitude and longitude of the location? (yes/no)");
+    System.out.println("Do you have the latitude and longitude of the location? Enter:(yes/no)");
     String input = sc.nextLine();
     if (input.equalsIgnoreCase("yes")) {
-      // gets user input for the latitude of the location
+      // user input for the latitude of the location
       System.out.println("Please enter the latitude of the location: ");
       newEvent.setLatitude(sc1.nextFloat());
 
-      // gets user input for the longitude of the location
+      // user input for the longitude of the location
       System.out.println("Please enter the longitude of the location: ");
       newEvent.setLongitude(sc1.nextFloat());
 
-      // Set marker saying lat/lon have been set
+      // marker saying lat/lon have been set
       newEvent.setIsLat(true);
     }
     else {
       // Set marker saying lat/lon have not been set
       newEvent.setIsLat(false);
-        checkLatLong = false;
+      checkLatLong = false;
     }
 
     // Get user input for a start date
@@ -98,7 +98,7 @@ public class eventPrompt {
     }
 
     // Get user input for an end time
-    System.out.println("Please enter an end time in 24 hour time in the following format hhmmss: ");
+    System.out.println("Please enter the end time in 24 hour time in the following format hhmmss: ");
     String endTime = sc.nextLine();
     newEvent.setEndTime(endTime);
     while (!checkTime(endTime)) {
@@ -108,21 +108,17 @@ public class eventPrompt {
     }
 
     // input the great circle distance(computed in Driver.java) into comment field
-     
-    if(Driver.calDistance()== true)
-    {
-    	newEvent.setComment(Driver.distance());
-    	if(checkLatLong == false)
-    	{
-    		newEvent.setComment("Missing Latitude/Longitude info to calculate GCD");
-    	}
+
+    if (Driver.calDistance() == true) {
+      newEvent.setComment(Driver.distance());
+      if (checkLatLong == false) {
+        newEvent.setComment("Missing Latitude/Longitude info to calculate GCD");
+      }
     }
-       else
-       {
-        newEvent.setComment("You have no other events today");
-       }
+    else {
+      newEvent.setComment("You have no other events today");
+    }
   }
-  
 
 
   /**

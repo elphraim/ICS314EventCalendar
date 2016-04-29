@@ -33,31 +33,36 @@ public class Event {
 
 
   public Event() {
+    // Unique random UID number for each event
     UID = UUID.randomUUID().toString().toUpperCase();
-    TimeZone tmz = TimeZone.getTimeZone("UTC");
-    Calendar cal = Calendar.getInstance(tmz);
+    TimeZone tz = TimeZone.getTimeZone("UTC");
+    Calendar cal = Calendar.getInstance(tz);
 
     /* get time stamp */
     int hour = cal.get(Calendar.HOUR);
     int minute = cal.get(Calendar.MINUTE);
     int second = cal.get(Calendar.SECOND);
 
-    /* check time */
+    /* check current time */
     currentTime = "";
-    if (hour < 10)
+    if (hour < 10) {
       currentTime += "0" + hour;
-    else
+    }
+    else {
       currentTime += "" + hour;
-
-    if (minute < 10)
+    }
+    if (minute < 10) {
       currentTime += "0" + minute;
-    else
+    }
+    else {
       currentTime += "" + minute;
-
-    if (second < 10)
+    }
+    if (second < 10) {
       currentTime += "0" + second;
-    else
+    }
+    else {
       currentTime += "" + second;
+    }
 
     /* get date stamp */
     int year = cal.get(Calendar.YEAR);
@@ -66,20 +71,25 @@ public class Event {
 
     /* check date */
     currentDate = "";
-    if (year < 10)
+    if (year < 10) {
       currentDate += "0" + year;
-    else
+    }
+    else {
       currentDate += "" + year;
+    }
 
-    if (month < 10)
+    if (month < 10) {
       currentDate += "0" + month;
-    else
+    }
+    else {
       currentDate += "" + month;
-
-    if (day < 10)
+    }
+    if (day < 10) {
       currentDate += "0" + day;
-    else
+    }
+    else {
       currentDate += "" + day;
+    }
   }
 
 /**
@@ -112,28 +122,28 @@ public class Event {
   }
 
 /**
- * Creates directory on Desktop
- * for .ICS files
+ * Creates .ICS file in a
+ * directory on the Desktop
  * @return true if file was created
  */
   public boolean createFile() {
     String filename = name + ".ics";
-    String foldername = "Calendar-Files";
+    String directory = "Calendar-Files";
     String userHome = System.getProperty("user.home") + "/Desktop/";
-
     System.out.println("Generating Event File...");
+    
     try {
-      File folder = new File(userHome, foldername);
+      File folder = new File(userHome, directory);
 
-      // if the folder does not exist, create it
+      // if no folder exists, create it
       if (!folder.exists()) {
         folder.mkdir();
       }
 
       // change file location
-      File file = new File(userHome + "/" + foldername, filename);
+      File file = new File(userHome + "/" + directory, filename);
 
-      // if file does not exist, create it
+      // if no file exists, create it
       if (!file.exists()) {
         file.createNewFile();
       }

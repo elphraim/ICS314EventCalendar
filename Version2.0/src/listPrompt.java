@@ -8,17 +8,18 @@ import java.io.File;
  * @author Spencer Luther
  */
 public class listPrompt {
-  String userHome;
-  String foldername;
-  File folder;
   File[] calFiles;
-  String[] eventFiles;
+  File folder;
+  String foldername;
+  String userHome;
   int noEvents;
+
 
   /**
    * Sets directory for .ICS files
    */
   public listPrompt() {
+    /* Location for folder */
     userHome = System.getProperty("user.home") + "/Desktop/";
     foldername = "Calendar-Files";
     folder = new File(userHome, foldername);
@@ -26,23 +27,25 @@ public class listPrompt {
     noEvents = calFiles.length;
   }
 
-/**
- * Checks if directory exists and has events
- * @return false if folder exists
- */
+
+  /**
+   * Checks if directory exists and has events
+   * 
+   * @return false if folder exists
+   */
   public boolean promptUser() {
-    /* if the folder does not exist then there are no events, hence the user is free. */
+    /* checks if no folder exists */
     if (!folder.exists()) {
       System.out.println("Directory is empty.");
       return true;
     }
 
-    /* if the folder is empty, there are no events, hence the user is free */
+    /* checks if there are no events */
     if (noEvents == 0) {
       System.out.println("Directory is empty.");
       return true;
     }
-
+    /* events exist */
     if (noEvents > 0) {
       return true;
     }
