@@ -25,7 +25,7 @@ public class Driver {
       System.out.println("\t| Menu:");
       System.out.println("\t| 0: Add an Event");
       System.out.println("\t| 1: Show sorted Calendar List");
-      System.out.print("\t| : Quit\n:");
+      System.out.print("\t| 2: Quit\n:");
       int choice = scan.nextInt();
 
       if (choice < 0 || choice > 2) {
